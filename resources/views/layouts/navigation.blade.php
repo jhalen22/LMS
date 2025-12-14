@@ -12,9 +12,21 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                    @if(Auth::user()->role === 'student')
+                        <a href="{{ route('student.courses.index') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('student.courses.index') ? 'border-white' : 'border-transparent' }} text-sm font-medium leading-5 text-white hover:text-nature-200 focus:outline-none transition duration-150 ease-in-out">
+                            Browse Courses
+                        </a>
+                        <a href="{{ route('student.bookmarks') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('student.bookmarks') ? 'border-white' : 'border-transparent' }} text-sm font-medium leading-5 text-white hover:text-nature-200 focus:outline-none transition duration-150 ease-in-out">
+                            My Bookmarks
+                        </a>
+                        <a href="{{ route('student.completions') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('student.completions') ? 'border-white' : 'border-transparent' }} text-sm font-medium leading-5 text-white hover:text-nature-200 focus:outline-none transition duration-150 ease-in-out">
+                            Completed Courses
+                        </a>
+                    @else
+                        <a href="{{ route('dashboard') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->routeIs('dashboard') ? 'border-white' : 'border-transparent' }} text-sm font-medium leading-5 text-white hover:text-nature-200 focus:outline-none transition duration-150 ease-in-out">
+                            Dashboard
+                        </a>
+                    @endif
                 </div>
             </div>
 
@@ -65,9 +77,21 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            @if(Auth::user()->role === 'student')
+                <a href="{{ route('student.courses.index') }}" class="block w-full ps-3 pe-4 py-2 border-l-4 {{ request()->routeIs('student.courses.index') ? 'border-white bg-nature-800' : 'border-transparent' }} text-start text-base font-medium text-white hover:bg-nature-700 focus:outline-none transition duration-150 ease-in-out">
+                    Browse Courses
+                </a>
+                <a href="{{ route('student.bookmarks') }}" class="block w-full ps-3 pe-4 py-2 border-l-4 {{ request()->routeIs('student.bookmarks') ? 'border-white bg-nature-800' : 'border-transparent' }} text-start text-base font-medium text-white hover:bg-nature-700 focus:outline-none transition duration-150 ease-in-out">
+                    My Bookmarks
+                </a>
+                <a href="{{ route('student.completions') }}" class="block w-full ps-3 pe-4 py-2 border-l-4 {{ request()->routeIs('student.completions') ? 'border-white bg-nature-800' : 'border-transparent' }} text-start text-base font-medium text-white hover:bg-nature-700 focus:outline-none transition duration-150 ease-in-out">
+                    Completed Courses
+                </a>
+            @else
+                <a href="{{ route('dashboard') }}" class="block w-full ps-3 pe-4 py-2 border-l-4 {{ request()->routeIs('dashboard') ? 'border-white bg-nature-800' : 'border-transparent' }} text-start text-base font-medium text-white hover:bg-nature-700 focus:outline-none transition duration-150 ease-in-out">
+                    Dashboard
+                </a>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
@@ -78,18 +102,18 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')" class="text-white">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
+                <a href="{{ route('profile.edit') }}" class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-white hover:bg-nature-700 focus:outline-none transition duration-150 ease-in-out">
+                    Profile
+                </a>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();" class="text-white">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
+                    <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); this.closest('form').submit();"
+                            class="block w-full ps-3 pe-4 py-2 border-l-4 border-transparent text-start text-base font-medium text-white hover:bg-nature-700 focus:outline-none transition duration-150 ease-in-out">
+                        Log Out
+                    </a>
                 </form>
             </div>
         </div>

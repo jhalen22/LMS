@@ -12,12 +12,38 @@ class Course extends Model
     protected $fillable = [
         'user_id',
         'title',
-        'description',
+        'short_description', 
+        'full_content',      
+        'thumbnail', 
+        'video_url',
+        'pdf_file',        
     ];
 
-    // Instructor who owns the course
     public function instructor()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    
+public function students()
+{
+    return $this->belongsToMany(User::class, 'course_user')
+        ->withPivot(['is_bookmarked', 'is_completed'])
+        ->withTimestamps();
+}
+
+public function isBookmarkedBy($userId)
+{
+    return $this->students()
+        ->where('user_id', $userId)
+        ->wherePivot('is_bookmarked', true)
+        ->exists();
+}
+
+public function isCompletedBy($userId)
+{
+    return $this->students()
+        ->where('user_id', $userId)
+        ->wherePivot('is_completed', true)
+        ->exists();
+}
 }

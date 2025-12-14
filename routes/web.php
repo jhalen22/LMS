@@ -42,6 +42,13 @@ Route::middleware(['auth'])
     ->group(function () {
         Route::get('/courses', [StudentCourseController::class, 'index'])->name('courses.index');
         Route::get('/courses/{course}', [StudentCourseController::class, 'show'])->name('courses.show');
+        
+        // Bookmark and Complete
+        Route::post('/courses/{course}/bookmark', [StudentCourseController::class, 'toggleBookmark'])->name('courses.bookmark');
+        Route::post('/courses/{course}/complete', [StudentCourseController::class, 'toggleComplete'])->name('courses.complete');
+        
+        // My Bookmarks and Completions Pages
+        Route::get('/bookmarks', [StudentCourseController::class, 'myBookmarks'])->name('bookmarks');
+        Route::get('/completions', [StudentCourseController::class, 'myCompletions'])->name('completions');
     });
-
 require __DIR__.'/auth.php';

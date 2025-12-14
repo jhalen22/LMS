@@ -37,5 +37,23 @@ class User extends Authenticatable
             ? asset('storage/' . $this->profile_picture)
             : asset('images/default-avatar.png');
     }
+
+        // Courses bookmarked or completed by student
+        public function courses()
+        {
+    return $this->belongsToMany(Course::class, 'course_user')
+        ->withPivot(['is_bookmarked', 'is_completed'])
+        ->withTimestamps();
+        }
+
+    public function bookmarkedCourses()
+    {
+    return $this->courses()->wherePivot('is_bookmarked', true);
+    }
+
+    public function completedCourses()
+    {
+    return $this->courses()->wherePivot('is_completed', true);
+    }
 }
 

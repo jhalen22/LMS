@@ -17,15 +17,15 @@
         </div>
 
 
-        <!-- Role -->
-        <div class="mt-4">
-            <x-input-label for="role" :value="__('Register as')" />
-            <select id="role" name="role" class="block mt-1 w-full" required>
-            <option value="student" selected>Student</option>
-             <option value="instructor">Instructor</option>
-            </select>
-                <x-input-error :messages="$errors->get('role')" class="mt-2" />
-        </div>
+                    <!-- Role -->
+            <div class="mt-4">
+                <x-input-label for="role" :value="__('Register as')" />
+                <select id="role" name="role" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" required>
+                <option value="student" {{ old('role') == 'student' ? 'selected' : '' }}>Student</option>
+                    <option value="instructor" {{ old('role') == 'instructor' ? 'selected' : '' }}>Instructor</option>
+                    </select>
+                    <x-input-error :messages="$errors->get('role')" class="mt-2" />
+            </div>
 
         <!-- Password -->
         <div class="mt-4">

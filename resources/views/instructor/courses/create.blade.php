@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="p-6">
-                    <form method="POST" action="{{ route('instructor.courses.store') }}">
+                    <form method="POST" action="{{ route('instructor.courses.store') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-6">
@@ -56,7 +56,33 @@
                             @enderror
                         </div>
 
-                        <div class="flex gap-3 pt-4 border-t border-nature-200">
+
+                        <!-- Video URL -->
+                                <div class="mb-6">
+                                 <label class="block text-nature-800 text-sm font-bold mb-2">
+                                    Video URL (YouTube, Vimeo, etc.) - Optional
+                                    </label>
+                                    <input type="url" name="video_url" value="{{ old('video_url') }}"
+                                        class="input-nature w-full @error('video_url') border-red-500 @enderror"
+                                        placeholder="https://www.youtube.com/watch?v=...">
+                                    @error('video_url')
+                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                            <!-- PDF File -->
+                            <div class="mb-6">
+                                <label class="block text-nature-800 text-sm font-bold mb-2">
+                                    PDF Resource File - Optional
+                                </label>
+                                <input type="file" name="pdf_file" accept=".pdf"
+                                    class="input-nature w-full @error('pdf_file') border-red-500 @enderror">
+                                <p class="text-xs text-gray-500 mt-1">Max: 10MB</p>
+                                @error('pdf_file')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
+                            </div>
+                                                <div class="flex gap-3 pt-4 border-t border-nature-200">
                             <button type="submit" class="btn-nature-primary flex items-center">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
@@ -67,6 +93,7 @@
                                 Cancel
                             </a>
                         </div>
+
                     </form>
                 </div>
             </div>

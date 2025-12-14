@@ -8,20 +8,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('course_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('title');
-            $table->text('short_description')->nullable();
-            $table->longText('full_content')->nullable();
-            $table->string('video_url')->nullable();
-            $table->string('pdf_file')->nullable();
+            $table->foreignId('course_id')->constrained()->cascadeOnDelete();
+            $table->boolean('is_bookmarked')->default(false);
+            $table->boolean('is_completed')->default(false);
             $table->timestamps();
+            
+            $table->unique(['user_id', 'course_id']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('course_user');
     }
 };
