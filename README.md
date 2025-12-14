@@ -8,9 +8,8 @@ A comprehensive Learning Management System built with Laravel that enables instr
 - **Loise Raphael Padriga**
 
 ## Deployment Link
-**Live Application:** [Your Deployment URL Here]
-
-> Replace with your actual deployment URL (e.g., https://your-app.herokuapp.com)
+**Live Application:**
+https://lms-production-0be5.up.railway.app/
 
 ##  Frameworks & Technologies Used
 - **Backend Framework:** Laravel 11.x (PHP 8.2+)
